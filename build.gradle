@@ -1,0 +1,31 @@
+group 'me.shubbush'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    junitVersion = '4.11'
+    lombokVersion = '1.16.18'
+    jacksonVersion = '2.9.0'
+    slf4jVersion = '1.7.25'
+    logbackVersion = '1.2.3'
+}
+
+dependencies {
+    testCompile "junit:junit:$junitVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "ch.qos.logback:logback-core:$logbackVersion"
+}
