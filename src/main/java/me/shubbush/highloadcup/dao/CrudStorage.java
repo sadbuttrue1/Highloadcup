@@ -1,9 +1,7 @@
 package me.shubbush.highloadcup.dao;
 
-import me.shubbush.highloadcup.exception.EntityNotFoundException;
-
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -18,9 +16,12 @@ public abstract class CrudStorage<ID, T> {
         storage = new ConcurrentHashMap<>();
     }
 
-    public T find(ID id) throws EntityNotFoundException {
-        return Optional.ofNullable(storage.get(id))
-                .orElseThrow(EntityNotFoundException::new);
+    public T find(ID id) {
+        return storage.get(id);
+    }
+
+    public Collection<T> findAll() {
+        return storage.values();
     }
 
     public List<T> findByIdIn(List<ID> ids) {
@@ -33,9 +34,12 @@ public abstract class CrudStorage<ID, T> {
         return storage.put(id, obj);
     }
 
-    public void delete(ID id) throws EntityNotFoundException {
-        Optional.ofNullable(storage.remove(id))
-                .orElseThrow(EntityNotFoundException::new);
+    public void putIfAbsent(ID key, T value) {
+        storage.putIfAbsent(key, value);
+    }
+
+    public void delete(ID id) {
+        storage.remove(id);
     }
 
 }

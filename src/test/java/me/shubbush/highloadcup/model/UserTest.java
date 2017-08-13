@@ -7,6 +7,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.Test;
 
 import java.time.Instant;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,7 +24,7 @@ public class UserTest {
         User user = User.builder()
                 .firstName("FirstName")
                 .lastName("LastName")
-                .birthDate(Instant.now())
+                .birthDate(new Date())
                 .id(1)
                 .build();
 
